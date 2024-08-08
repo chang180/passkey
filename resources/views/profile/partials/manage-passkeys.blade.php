@@ -9,7 +9,7 @@
         </p>
     </header>
 
-    <form name="createPasskey" method="post" action="/" class="mt-6 space-y-6">
+    <form x-data="registerPasskey" x-on:submit.prevent="register()" name="createPasskey" method="post" action="/" class="mt-6 space-y-6">
         @csrf
 
         <div>
@@ -33,11 +33,11 @@
                     <span class="text-sm font-thin text-gray-600">Added {{ $passkey->created_at->diffForHumans() }}</span>
                 </div>
 
-                <form method="post" action="/">
+                <form method="post" action="/passkeys/{{ $passkey->id }}">
                     @csrf
                     @method('DELETE')
 
-                    <input type="hidden" name="id" value="">
+                    <input type="hidden" name="id" value="{{ $passkey->id }}">
                     <x-danger-button class="">Remove</x-danger-button>
                 </form>
             </li>

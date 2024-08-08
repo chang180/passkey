@@ -43,9 +43,12 @@ class PasskeyPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Passkey $passkey): bool
+    public function delete(User $user, Passkey $passkey): Response
     {
-        //
+        // user can delete passkey if the user is the owner of the passkey
+        return $user->id === $passkey->user_id
+            ? Response::allow()
+            : Response::deny('You do not own this passkey.');
     }
 
     /**
