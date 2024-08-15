@@ -71,8 +71,6 @@ class PasskeyController extends Controller
             ])->errorBag('createPasskey');
         }
 
-        dd($publicKeyCredentialSource);
-
         $request->user()->passkeys()->create([
             'name' => $request->name,
             'credential_id' => base64_encode($publicKeyCredentialSource->publicKeyCredentialId),
